@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SCV Inquiry Management Dashboard</title>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>SCV <span>Inquiry Management Dashboard</span></h1>
+        <div class="header-actions">
+            <a href="index.html" class="btn-secondary">View Website</a>
+            <button onclick="logout()" class="btn-logout">Logout</button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="dashboard-container">
+        
+        <!-- Statistics Section -->
+        <section class="stats-grid" id="stats-section">
+            <div class="stat-card total">
+                <div class="stat-title">Total Inquiries</div>
+                <div class="stat-value" id="stat-total">0</div>
+            </div>
+            <div class="stat-card new">
+                <div class="stat-title">New Inquiries</div>
+                <div class="stat-value" id="stat-new">0</div>
+            </div>
+            <div class="stat-card contacted">
+                <div class="stat-title">Contacted</div>
+                <div class="stat-value" id="stat-contacted">0</div>
+            </div>
+            <div class="stat-card inprogress">
+                <div class="stat-title">In Progress</div>
+                <div class="stat-value" id="stat-inprogress">0</div>
+            </div>
+            <div class="stat-card completed">
+                <div class="stat-title">Completed</div>
+                <div class="stat-value" id="stat-completed">0</div>
+            </div>
+        </section>
+
+        <!-- Search & Filter Controls -->
+        <section class="controls-card">
+            <div class="controls-grid">
+                <div class="search-wrapper">
+                    <!-- Search Icon SVG -->
+                    <span class="search-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </span>
+                    <input type="text" id="search-input" class="search-input" placeholder="Search by name, company, or phone...">
+                </div>
+
+                <div class="filter-group">
+                    <label for="status-filter">Status:</label>
+                    <select id="status-filter" class="select-input">
+                        <option value="ALL">All Statuses</option>
+                        <option value="NEW">New</option>
+                        <option value="CONTACTED">Contacted</option>
+                        <option value="IN_PROGRESS">In Progress</option>
+                        <option value="COMPLETED">Completed</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="page-size">Show:</label>
+                    <select id="page-size" class="select-input" style="min-width: 80px;">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+
+                <button class="btn-primary" id="btn-search">Apply Filters</button>
+            </div>
+        </section>
+
+        <!-- Inquiry Table Card -->
+        <section class="table-card">
+            <div class="table-responsive">
+                <table id="inquiryTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>Company</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inquiryTableBody">
+                        <!-- Content populated dynamically via JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Loader State -->
+            <div id="table-loader" class="table-loader" style="display: none;">
+                <div class="spinner"></div>
+                <p>Fetching inquiries from server...</p>
+            </div>
+
+            <!-- Empty State -->
+            <div id="table-empty" class="table-empty" style="display: none;">
+                <p>No inquiries found matching the criteria.</p>
+            </div>
+
+            <!-- Pagination Footer -->
+            <div class="pagination-footer">
+                <div class="pagination-info" id="pagination-info">
+                    Showing 0 to 0 of 0 inquiries
+                </div>
+                <div class="pagination-controls" id="pagination-controls">
+                    <!-- Pagination buttons populated dynamically -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Toast Container for Notifications -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- View Details Modal -->
+    <div class="modal-overlay" id="details-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Inquiry Details</h2>
+                <button class="modal-close" onclick="closeModal('details-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="details-grid">
+                    <div>
+                        <div class="detail-label">Inquiry ID</div>
+                        <div class="detail-value" id="detail-id">-</div>
+                    </div>
+                    <div>
+                        <div class="detail-label">Created Date</div>
+                        <div class="detail-value" id="detail-date">-</div>
+                    </div>
+                    <div>
+                        <div class="detail-label">Customer Name</div>
+                        <div class="detail-value" id="detail-name">-</div>
+                    </div>
+                    <div>
+                        <div class="detail-label">Company Name</div>
+                        <div class="detail-value" id="detail-company">-</div>
+                    </div>
+                    <div>
+                        <div class="detail-label">Phone Number</div>
+                        <div class="detail-value" id="detail-phone">-</div>
+                    </div>
+                    <div>
+                        <div class="detail-label">Email Address</div>
+                        <div class="detail-value" id="detail-email">-</div>
+                    </div>
+                    <div>
+                        <div class="detail-label">Current Status</div>
+                        <div class="detail-value" id="detail-status">-</div>
+                    </div>
+                    <div class="details-full-width">
+                        <div class="detail-label">Requirements Summary</div>
+                        <div class="requirements-box" id="detail-requirements">-</div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeModal('details-modal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal-overlay" id="delete-modal">
+        <div class="modal-content confirm-delete">
+            <div class="confirm-delete-icon">
+                <!-- Alert icon SVG -->
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                    <line x1="12" y1="9" x2="12" y2="13"></line>
+                    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                </svg>
+            </div>
+            <div class="confirm-delete-title">Delete Inquiry?</div>
+            <div class="confirm-delete-message">
+                Are you sure you want to delete the inquiry from <strong id="delete-confirm-name"></strong>? This action is permanent and cannot be undone.
+            </div>
+            <div class="modal-footer" style="justify-content: center;">
+                <button class="btn-cancel" onclick="closeModal('delete-modal')">Cancel</button>
+                <button class="btn-danger" id="btn-confirm-delete">Yes, Delete</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        if(localStorage.getItem("loggedIn") !== "true") {
+            window.location.href = "admin-login.html";
+        }
+
+        function logout() {
+            localStorage.removeItem("loggedIn");
+            localStorage.removeItem("username");
+            window.location.href = "admin-login.html";
+        }
+    </script>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

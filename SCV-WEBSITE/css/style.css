@@ -1,0 +1,1328 @@
+/* ==========================================================================
+   SCV HOT BEVERAGES & PANTRY SERVICES - PREMIUM DESIGN SYSTEM
+   ==========================================================================
+   REDESIGN & OVERHAUL CHANGES MADE:
+   1. COLOR PALETTE OVERHAUL: Defined custom CSS variables for a premium
+      emerald green (--primary-deep) and warm gold (--accent-gold) brand theme.
+   2. TYPOGRAPHY: Imported and configured Outfit (for headings) and Inter 
+      (for body text) Google Fonts to replace browser-default Arial.
+   3. RESPONSIVENESS: Integrated system-wide responsive styles and layout 
+      adjustments via media queries.
+   4. COMPONENT STYLING: Added new visual style definitions for cards 
+      (.provide-card, .process-card, .benefit-card, .why-card, .stat-card) 
+      to support grid layouts.
+   5. BUG FIXES: Corrected invalid logo width syntax (100 px -> 100px).
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+    /* Color Palette */
+    --primary-deep: #0B3C33;       /* Rich Deep Emerald Green */
+    --primary-mid: #165A4E;        /* Medium Forest Teal */
+    --primary-light: #2A9D8F;      /* Vibrant Accent Teal */
+    --accent-gold: #D4AF37;        /* Premium Warm Amber/Gold */
+    --accent-gold-hover: #BCA030;  /* Darker Gold on Hover */
+    --bg-light: #F4F7F6;           /* Soft Warm Mint Base */
+    --bg-card: #FFFFFF;            /* Clean Card White */
+    --text-dark: #1B2A27;          /* Charcoal Green for High Readability */
+    --text-muted: #5A6D6A;         /* Muted Slate Green for Secondary Text */
+    --text-light: #FFFFFF;
+    
+    /* Layout & Spacing */
+    --max-width: 1200px;
+    --transition-speed: 0.3s;
+    
+    /* Shadows & Depths */
+    --shadow-sm: 0 4px 10px rgba(11, 60, 51, 0.03);
+    --shadow-md: 0 8px 30px rgba(11, 60, 51, 0.06);
+    --shadow-lg: 0 16px 40px rgba(11, 60, 51, 0.12);
+    
+    /* Borders */
+    --border-radius-sm: 8px;
+    --border-radius-md: 14px;
+    --border-radius-lg: 24px;
+    --border-light: 1px solid rgba(22, 90, 78, 0.08);
+}
+
+/* ==========================================================================
+   RESET & BASE STYLES
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.7;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition-speed) ease;
+}
+
+/* ==========================================================================
+   TYPOGRAPHY
+   ========================================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+    color: var(--primary-deep);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+h1 { font-size: 2.75rem; }
+h2 { font-size: 2.25rem; margin-bottom: 1.5rem; text-align: center; }
+h3 { font-size: 1.5rem; margin-bottom: 0.75rem; }
+
+p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: var(--text-muted);
+}
+
+.text-center { text-align: center; }
+
+/* ==========================================================================
+   LAYOUT UTILITIES
+   ========================================================================== */
+
+.container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+section {
+    padding: 90px 0;
+}
+
+section:nth-of-type(even) {
+    background-color: var(--bg-card);
+}
+
+/* ==========================================================================
+   BUTTONS
+   ========================================================================== */
+
+.btn {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    border: none;
+    transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #F3D060 0%, #D4AF37 50%, #BCA030 100%);
+    color: var(--primary-deep);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #FFE07D 0%, #E5BE43 50%, #A3871B 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.45);
+}
+
+.btn-secondary {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--text-light);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary:hover {
+    background-color: var(--text-light);
+    color: var(--primary-deep);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--primary-deep);
+    border: 2px solid var(--primary-mid);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-deep);
+    color: var(--text-light);
+    transform: translateY(-2px);
+}
+
+.btn-whatsapp {
+    background-color: #25D366;
+    color: white;
+}
+
+.btn-whatsapp:hover {
+    background-color: #20BA5A;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+}
+
+/* ==========================================================================
+   HEADER & NAVBAR
+   ========================================================================== */
+
+header {
+    background: rgba(11, 60, 51, 0.96);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.logo img {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    border-radius: var(--border-radius-sm);
+}
+
+.logo span {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-light);
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+nav a {
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    padding: 8px 0;
+}
+
+nav a:hover {
+    color: var(--accent-gold);
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-gold);
+    transition: width var(--transition-speed) ease;
+}
+
+nav a:hover::after,
+nav a.active::after {
+    width: 100%;
+}
+
+nav a.active {
+    color: var(--accent-gold);
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   HERO SECTIONS (SHARED & SUBPAGES)
+   ========================================================================== */
+
+.hero {
+    background: radial-gradient(circle at 85% 15%, rgba(243, 208, 96, 0.12) 0%, transparent 50%),
+                linear-gradient(135deg, #0B3C33 0%, #165A4E 50%, #207D6D 100%);
+    color: var(--text-light);
+    padding: 100px 0 120px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle at 80% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 60px;
+}
+
+.hero-text {
+    flex: 1.2;
+}
+
+.hero-text h2 {
+    font-size: 3.25rem;
+    color: var(--text-light);
+    line-height: 1.15;
+    margin-bottom: 24px;
+    text-align: left;
+    font-weight: 800;
+}
+
+.hero-text p {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 35px;
+    max-width: 620px;
+}
+
+.hero-text .btn {
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
+.hero-image {
+    flex: 0.8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.hero-image img {
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    max-height: 420px;
+    width: 100%;
+    object-fit: cover;
+}
+
+/* Stats inside Hero */
+.hero-stats {
+    display: flex;
+    gap: 30px;
+    margin-top: 45px;
+    flex-wrap: wrap;
+}
+
+.hero-stats div {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    padding: 16px 28px;
+    border-radius: var(--border-radius-md);
+    min-width: 140px;
+    transition: transform var(--transition-speed) ease;
+}
+
+.hero-stats div:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.hero-stats h3 {
+    background: linear-gradient(135deg, #F3D060 0%, #D4AF37 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 2px;
+    display: inline-block;
+}
+
+.hero-stats p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
+    margin-bottom: 0;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* SUBPAGE HEROES */
+.about-hero, .services-hero, .gallery-hero, .contact-hero {
+    background: radial-gradient(circle at 85% 15%, rgba(243, 208, 96, 0.12) 0%, transparent 50%),
+                linear-gradient(135deg, #0B3C33 0%, #165A4E 100%);
+    color: var(--text-light);
+    text-align: center;
+    padding: 100px 0;
+    position: relative;
+}
+
+.about-hero h1, .services-hero h1, .gallery-hero h1, .contact-hero h1 {
+    font-size: 3.5rem;
+    color: var(--text-light);
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.about-hero p, .services-hero p, .gallery-hero p, .contact-hero p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   CARDS & GRIDS (SHARED)
+   ========================================================================== */
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius-md);
+    padding: 35px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background-color: transparent;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(22, 90, 78, 0.15);
+}
+
+.card:hover::before {
+    background-color: var(--accent-gold);
+}
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--border-radius-sm);
+    background-color: rgba(22, 90, 78, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    color: var(--accent-gold);
+    filter: drop-shadow(0 2px 6px rgba(212, 175, 55, 0.25));
+    transition: all var(--transition-speed) ease;
+    animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+    100% { transform: translateY(0); }
+}
+
+.card:hover .card-icon {
+    background-color: var(--primary-deep);
+    color: var(--accent-gold);
+}
+
+/* ==========================================================================
+   HOMEPAGE SPECIFIC SECTIONS
+   ========================================================================== */
+
+/* About Preview */
+.about-preview-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-preview-content p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+}
+
+/* Services Preview */
+.service-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.service-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    border-radius: var(--border-radius-md);
+    padding: 35px 30px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: transparent;
+    transition: background-color var(--transition-speed) ease;
+}
+
+.service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(22, 90, 78, 0.15);
+}
+
+.service-card:hover::after {
+    background-color: var(--accent-gold);
+}
+
+.service-card h3 {
+    font-size: 1.35rem;
+    margin-bottom: 12px;
+}
+
+/* Why Choose Us Section */
+.why-choose-us {
+    background-color: var(--bg-light);
+}
+
+.why-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 50px;
+}
+
+.why-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all var(--transition-speed) ease;
+}
+
+.why-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.why-card h3 {
+    font-size: 1.25rem;
+    color: var(--primary-deep);
+    margin-bottom: 12px;
+}
+
+/* ==========================================================================
+   ABOUT PAGE
+   ========================================================================== */
+
+/* Company Overview */
+.company-overview {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.company-overview p {
+    font-size: 1.1rem;
+    margin-bottom: 24px;
+}
+
+/* Mission & Vision */
+.mission-vision {
+    background-color: var(--bg-card);
+}
+
+.mission-vision-container {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.mv-card {
+    flex: 1;
+    min-width: 320px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: var(--shadow-sm);
+}
+
+.mv-card h2 {
+    font-size: 1.75rem;
+    text-align: left;
+    margin-bottom: 16px;
+    color: var(--primary-deep);
+}
+
+/* Core Values */
+.values-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.value-card {
+    background: var(--bg-card);
+    padding: 24px;
+    border-radius: var(--border-radius-sm);
+    text-align: center;
+    font-weight: 600;
+    color: var(--primary-deep);
+    box-shadow: var(--shadow-sm);
+    border: var(--border-light);
+    transition: all var(--transition-speed) ease;
+}
+
+.value-card:hover {
+    background: var(--primary-deep);
+    color: var(--accent-gold);
+    transform: translateY(-3px);
+}
+
+/* Company Stats Grid */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 30px 20px;
+    border-radius: var(--border-radius-md);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: transform var(--transition-speed) ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.stat-card h3 {
+    background: linear-gradient(135deg, #F3D060 0%, #D4AF37 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+    display: inline-block;
+}
+
+.stat-card p {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+}
+
+/* Call to Action blocks */
+.about-cta, .services-cta, .contact-cta {
+    background: radial-gradient(circle at 85% 15%, rgba(243, 208, 96, 0.12) 0%, transparent 55%),
+                linear-gradient(135deg, #0B3C33 0%, #165A4E 100%);
+    color: var(--text-light);
+    text-align: center;
+    padding: 80px 24px;
+}
+
+.about-cta h2, .services-cta h2, .contact-cta h2 {
+    color: var(--text-light);
+    font-size: 2.25rem;
+    margin-bottom: 12px;
+}
+
+.about-cta p, .services-cta p, .contact-cta p {
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 600px;
+    margin: 0 auto 30px;
+    font-size: 1.1rem;
+}
+
+.about-cta .btn, .services-cta .btn, .contact-cta .btn {
+    margin: 0 10px;
+}
+
+/* ==========================================================================
+   SERVICES PAGE
+   ========================================================================== */
+
+/* What we provide cards */
+.provide-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.provide-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    text-align: center;
+    transition: all var(--transition-speed) ease;
+}
+
+.provide-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(22, 90, 78, 0.15);
+}
+
+.provide-card h3 {
+    font-size: 1.3rem;
+    color: var(--primary-deep);
+    margin-bottom: 0;
+}
+
+/* Service Process Grid */
+.process-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.process-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 35px 25px;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    text-align: center;
+    position: relative;
+    transition: all var(--transition-speed) ease;
+}
+
+.process-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.process-card h3 {
+    font-size: 1.25rem;
+    color: var(--primary-deep);
+    margin-bottom: 12px;
+}
+
+/* Free Demo Section Layout */
+.demo-service {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.demo-service h2 {
+    margin-bottom: 20px;
+}
+
+.demo-service p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+/* Why Businesses Choose SCV */
+.benefits-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.benefit-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 24px;
+    border-radius: var(--border-radius-sm);
+    text-align: center;
+    font-weight: 600;
+    color: var(--primary-deep);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all var(--transition-speed) ease;
+}
+
+.benefit-card:hover {
+    background: var(--primary-deep);
+    color: var(--accent-gold);
+    transform: translateY(-3px);
+}
+
+/* ==========================================================================
+   CONTACT PAGE
+   ========================================================================== */
+
+/* Two-column layout */
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 50px;
+    margin-top: 50px;
+}
+
+.contact-info-column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.contact-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.contact-card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(22, 90, 78, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-deep);
+    flex-shrink: 0;
+    font-size: 1.25rem;
+}
+
+.contact-card-text h3 {
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+}
+
+.contact-card-text p {
+    margin-bottom: 4px;
+    font-size: 0.95rem;
+}
+
+.contact-form-section {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    padding: 40px;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.contact-form-section h2 {
+    text-align: left;
+    margin-bottom: 24px;
+}
+
+.contact-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.contact-form .full-width {
+    grid-column: span 2;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-deep);
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid rgba(22, 90, 78, 0.15);
+    background-color: var(--bg-light);
+    border-radius: var(--border-radius-sm);
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    transition: all var(--transition-speed) ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-light);
+    background-color: var(--bg-card);
+    box-shadow: 0 0 0 4px rgba(42, 157, 143, 0.15);
+}
+
+.contact-form button[type="submit"] {
+    grid-column: span 2;
+    justify-self: start;
+    margin-top: 10px;
+}
+
+/* ==========================================================================
+   TRUSTED CLIENTS SECTION
+   ========================================================================== */
+
+.trusted-clients {
+    background-color: var(--bg-card);
+    padding: 60px 0;
+    border-top: var(--border-light);
+    border-bottom: var(--border-light);
+    text-align: center;
+}
+
+.trusted-clients h2 {
+    font-size: 1.5rem;
+    margin-bottom: 25px;
+    color: var(--primary-deep);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+.client-logos-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.client-logo-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-speed) ease;
+}
+
+.client-logo-item img {
+    max-height: 40px;
+    max-width: 150px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.6;
+    transition: all var(--transition-speed) ease;
+}
+
+.client-logo-item:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+.client-logo-item:hover {
+    transform: scale(1.06);
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+footer {
+    background-color: var(--primary-deep);
+    color: var(--text-light);
+    padding: 40px 24px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+footer p {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0;
+    font-size: 0.95rem;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (MEDIA QUERIES)
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    
+    .hero-content {
+        gap: 40px;
+    }
+    
+    .hero-text h2 {
+        font-size: 2.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 60px 0;
+    }
+    
+    .navbar {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+        padding: 20px 16px;
+    }
+
+    .logo img {
+        width: 100px;
+        height: 100px;
+    }
+    
+    nav {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .hero-content {
+        flex-direction: column-reverse;
+        gap: 40px;
+        text-align: center;
+    }
+    
+    .hero-text h2 {
+        text-align: center;
+        font-size: 2.25rem;
+    }
+    
+    .hero-text p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .hero-stats {
+        justify-content: center;
+    }
+    
+    .hero-image {
+        width: 100%;
+        max-width: 450px;
+    }
+    
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .contact-form {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-form .full-width {
+        grid-column: span 1;
+    }
+    
+    .contact-form button[type="submit"] {
+        grid-column: span 1;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .logo img {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .logo span {
+        font-size: 1.1rem;
+    }
+    
+    .hero-text h2 {
+        font-size: 2rem;
+    }
+    
+    .hero-stats div {
+        flex: 1 1 100%;
+    }
+    
+    .mv-card {
+        padding: 30px 20px;
+    }
+}
+
+/* ==========================================================================
+   FORM VALIDATION FEEDBACK STYLES
+   ========================================================================== */
+
+/* Error styling for input fields */
+.contact-form input.error-input,
+.contact-form textarea.error-input {
+    border-color: #E63946 !important; /* Soft premium red border */
+    background-color: #FFF5F5 !important; /* Very soft light red background tint */
+}
+
+/* Red glow border when error field is focused */
+.contact-form input.error-input:focus,
+.contact-form textarea.error-input:focus {
+    border-color: #E63946 !important;
+    background-color: #FFF5F5 !important;
+    box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.15) !important; /* Soft red focus ring */
+}
+
+/* Error message text rendered below inputs */
+.error-message {
+    color: #E63946;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-top: -2px; /* Pull error slightly closer to the input element */
+    animation: fadeIn 0.3s ease; /* Smooth transition when appearing */
+}
+
+/* Success banner card displayed at the top of the form */
+.success-alert {
+    grid-column: span 2; /* Stretch across both columns of the form */
+    background-color: #E8F5E9; /* Premium light green background */
+    border: 1px solid rgba(46, 125, 50, 0.2); /* Soft forest green border */
+    padding: 20px;
+    border-radius: var(--border-radius-md);
+    margin-bottom: 20px;
+    animation: slideDown 0.3s ease;
+}
+
+.success-alert h3 {
+    color: #2E7D32; /* Forest green title */
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+}
+
+.success-alert p {
+    color: #388E3C; /* Muted forest green description text */
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-3px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/* ==========================================================================
+   HAMBURGER NAVIGATION MENU
+   ========================================================================== */
+
+/* Menu button styling (hidden by default on desktop) */
+#menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 8px;
+    transition: color var(--transition-speed) ease, transform 0.2s ease;
+    line-height: 1;
+    z-index: 1001; /* Ensure it stays above other elements */
+}
+
+#menu-btn:hover,
+#menu-btn:focus {
+    color: var(--accent-gold);
+    outline: none;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100% !important;
+        position: relative;
+        padding: 16px 24px !important;
+    }
+
+    #menu-btn {
+        display: block !important; /* Show hamburger button on mobile */
+    }
+
+    nav#nav-menu {
+        display: flex !important;
+        flex-direction: column !important;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(11, 60, 51, 0.98); /* Deep emerald theme matching the header */
+        backdrop-filter: blur(12px);
+        border-bottom: 2px solid var(--accent-gold);
+        box-shadow: var(--shadow-lg);
+        padding: 0 24px;
+        z-index: 999;
+        
+        /* Smooth height/opacity collapse transition */
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                    opacity 0.3s ease, 
+                    padding 0.4s ease;
+    }
+
+    /* Toggled open state of the menu */
+    nav#nav-menu.open {
+        max-height: 320px; /* Adjust height to fit the menu links */
+        opacity: 1;
+        padding: 20px 24px;
+    }
+
+    nav#nav-menu a {
+        width: 100%;
+        padding: 12px 0;
+        font-size: 1.05rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        text-align: left;
+    }
+
+    nav#nav-menu a:last-child {
+        border-bottom: none; /* Remove border from the last link */
+    }
+
+    nav#nav-menu a::after {
+        display: none; /* Hide the hover underline effect on mobile */
+    }
+    
+    nav#nav-menu a.active {
+        color: var(--accent-gold);
+    }
+}
+
+/* ==========================================================================
+   FLOATING WHATSAPP BUTTON
+   ========================================================================== */
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    background-color: #25D366;
+    color: white;
+    transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.whatsapp-float svg {
+    width: 32px;
+    height: 32px;
+    fill: currentColor;
+    transition: transform var(--transition-speed) ease;
+}
+
+.whatsapp-float:hover {
+    background-color: #20BA5A;
+    transform: scale(1.1) translateY(-3px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.45);
+}
+
+.whatsapp-float:hover svg {
+    transform: rotate(8deg);
+}
+
+/* Responsiveness for WhatsApp Button */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .whatsapp-float svg {
+        width: 26px;
+        height: 26px;
+    }
+}

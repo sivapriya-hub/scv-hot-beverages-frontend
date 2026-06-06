@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | SCV Hot Beverages</title>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="login-page">
+
+    <!-- Login Centered Container -->
+    <div class="login-wrapper">
+        <div class="login-card">
+            <div class="login-brand">
+                <h2>SCV</h2>
+                <p>Inquiry Management Portal</p>
+            </div>
+            
+            <div class="login-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <div class="input-icon-wrapper">
+                        <!-- User SVG Icon -->
+                        <span class="input-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </span>
+                        <input type="text" id="username" class="search-input" style="padding-left: 40px;" placeholder="Enter admin username" required>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 16px;">
+                    <label for="password">Password</label>
+                    <div class="input-icon-wrapper">
+                        <!-- Lock SVG Icon -->
+                        <span class="input-icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                        </span>
+                        <input type="password" id="password" class="search-input" style="padding-left: 40px;" placeholder="Enter password" required>
+                    </div>
+                </div>
+
+                <button onclick="login()" class="btn-primary" style="width: 100%; margin-top: 24px; padding: 12px;">Login to Dashboard</button>
+            </div>
+            
+            <div class="login-footer">
+                <p>&copy; 2026 SCV Hot Beverages. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login JS File -->
+    <script src="Login.js"></script>
+
+</body>
+</html>
