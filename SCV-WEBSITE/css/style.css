@@ -1016,6 +1016,70 @@ footer p {
 }
 
 /* ==========================================================================
+   HAMBURGER NAVIGATION MENU
+   ========================================================================== */
+
+/* Menu button styling (hidden by default on desktop) */
+#menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 8px;
+    transition: color var(--transition-speed) ease, transform 0.2s ease;
+    line-height: 1;
+    z-index: 1001; /* Ensure it stays above other elements */
+}
+
+#menu-btn:hover,
+#menu-btn:focus {
+    color: var(--accent-gold);
+    outline: none;
+}
+/* Mobile styles are consolidated under responsive design section */
+
+/* ==========================================================================
+   FLOATING WHATSAPP BUTTON
+   ========================================================================== */
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    background-color: #25D366;
+    color: white;
+    transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.whatsapp-float svg {
+    width: 32px;
+    height: 32px;
+    fill: currentColor;
+    transition: transform var(--transition-speed) ease;
+}
+
+.whatsapp-float:hover {
+    background-color: #20BA5A;
+    transform: scale(1.1) translateY(-3px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.45);
+}
+
+.whatsapp-float:hover svg {
+    transform: rotate(8deg);
+}
+/* WhatsApp Float Mobile styling consolidated under responsive design section */
+
+/* ==========================================================================
    RESPONSIVE DESIGN (MEDIA QUERIES)
    ========================================================================== */
 
@@ -1248,66 +1312,3 @@ footer p {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
-/* ==========================================================================
-   HAMBURGER NAVIGATION MENU
-   ========================================================================== */
-
-/* Menu button styling (hidden by default on desktop) */
-#menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    color: var(--text-light);
-    font-size: 1.8rem;
-    cursor: pointer;
-    padding: 8px;
-    transition: color var(--transition-speed) ease, transform 0.2s ease;
-    line-height: 1;
-    z-index: 1001; /* Ensure it stays above other elements */
-}
-
-#menu-btn:hover,
-#menu-btn:focus {
-    color: var(--accent-gold);
-    outline: none;
-}
-/* Mobile styles are consolidated under responsive design section */
-
-/* ==========================================================================
-   FLOATING WHATSAPP BUTTON
-   ========================================================================== */
-
-.whatsapp-float {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-    background-color: #25D366;
-    color: white;
-    transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.whatsapp-float svg {
-    width: 32px;
-    height: 32px;
-    fill: currentColor;
-    transition: transform var(--transition-speed) ease;
-}
-
-.whatsapp-float:hover {
-    background-color: #20BA5A;
-    transform: scale(1.1) translateY(-3px);
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.45);
-}
-
-.whatsapp-float:hover svg {
-    transform: rotate(8deg);
-}
-/* WhatsApp Float Mobile styling consolidated under responsive design section */
