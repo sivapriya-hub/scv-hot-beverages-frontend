@@ -993,6 +993,10 @@ nav a.active {
     transform: scale(1.06);
 }
 
+.client-logo-item.hidden-logo {
+    display: none;
+}
+
 /* ==========================================================================
    FOOTER
    ========================================================================== */
@@ -1034,21 +1038,68 @@ footer p {
     }
     
     .navbar {
-        flex-direction: column;
-        gap: 16px;
-        text-align: center;
-        padding: 20px 16px;
+        width: 100%;
+        position: relative;
+        padding: 16px 24px;
     }
 
     .logo img {
         width: 100px;
         height: 100px;
     }
+
+    #menu-btn {
+        display: block; /* Show hamburger button on mobile */
+    }
+
+    nav#nav-menu {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: rgba(11, 60, 51, 0.98); /* Deep emerald theme matching the header */
+        backdrop-filter: blur(12px);
+        border-bottom: 2px solid var(--accent-gold);
+        box-shadow: var(--shadow-lg);
+        padding: 0 24px;
+        z-index: 999;
+        
+        /* Smooth height/opacity collapse transition */
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                    opacity 0.3s ease, 
+                    padding 0.4s ease;
+    }
+
+    /* Toggled open state of the menu */
+    nav#nav-menu.open {
+        max-height: 320px; /* Adjust height to fit the menu links */
+        opacity: 1;
+        padding: 20px 24px;
+    }
+
+    nav#nav-menu a {
+        width: 100%;
+        padding: 12px 0;
+        font-size: 1.05rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        text-align: left;
+    }
+
+    nav#nav-menu a:last-child {
+        border-bottom: none; /* Remove border from the last link */
+    }
+
+    nav#nav-menu a::after {
+        display: none; /* Hide the hover underline effect on mobile */
+    }
     
-    nav {
-        gap: 20px;
-        flex-wrap: wrap;
-        justify-content: center;
+    nav#nav-menu a.active {
+        color: var(--accent-gold);
     }
     
     .hero-content {
@@ -1092,6 +1143,19 @@ footer p {
     .contact-form button[type="submit"] {
         grid-column: span 1;
         width: 100%;
+    }
+
+    /* Responsiveness for WhatsApp Button */
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .whatsapp-float svg {
+        width: 26px;
+        height: 26px;
     }
 }
 
@@ -1207,72 +1271,7 @@ footer p {
     color: var(--accent-gold);
     outline: none;
 }
-
-/* Mobile styles */
-@media (max-width: 768px) {
-    .navbar {
-        flex-direction: row !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        width: 100% !important;
-        position: relative;
-        padding: 16px 24px !important;
-    }
-
-    #menu-btn {
-        display: block !important; /* Show hamburger button on mobile */
-    }
-
-    nav#nav-menu {
-        display: flex !important;
-        flex-direction: column !important;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: rgba(11, 60, 51, 0.98); /* Deep emerald theme matching the header */
-        backdrop-filter: blur(12px);
-        border-bottom: 2px solid var(--accent-gold);
-        box-shadow: var(--shadow-lg);
-        padding: 0 24px;
-        z-index: 999;
-        
-        /* Smooth height/opacity collapse transition */
-        max-height: 0;
-        opacity: 0;
-        overflow: hidden;
-        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-                    opacity 0.3s ease, 
-                    padding 0.4s ease;
-    }
-
-    /* Toggled open state of the menu */
-    nav#nav-menu.open {
-        max-height: 320px; /* Adjust height to fit the menu links */
-        opacity: 1;
-        padding: 20px 24px;
-    }
-
-    nav#nav-menu a {
-        width: 100%;
-        padding: 12px 0;
-        font-size: 1.05rem;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        text-align: left;
-    }
-
-    nav#nav-menu a:last-child {
-        border-bottom: none; /* Remove border from the last link */
-    }
-
-    nav#nav-menu a::after {
-        display: none; /* Hide the hover underline effect on mobile */
-    }
-    
-    nav#nav-menu a.active {
-        color: var(--accent-gold);
-    }
-}
+/* Mobile styles are consolidated under responsive design section */
 
 /* ==========================================================================
    FLOATING WHATSAPP BUTTON
@@ -1311,18 +1310,4 @@ footer p {
 .whatsapp-float:hover svg {
     transform: rotate(8deg);
 }
-
-/* Responsiveness for WhatsApp Button */
-@media (max-width: 768px) {
-    .whatsapp-float {
-        bottom: 20px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-    }
-    
-    .whatsapp-float svg {
-        width: 26px;
-        height: 26px;
-    }
-}
+/* WhatsApp Float Mobile styling consolidated under responsive design section */
