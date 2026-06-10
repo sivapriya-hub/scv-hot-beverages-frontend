@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
                 try {
                     const response = await fetch(
-                        "http://localhost:8080/api/inquiries",
+    "https://scv-hot-beverages-production.up.railway.app/api/inquiries",
                         {
                             method: "POST",
                             headers: {
