@@ -6,32 +6,41 @@ async function login() {
     const password =
         document.getElementById("password").value;
 
-    const response = await fetch(
-        "http://localhost:8080/api/auth/login",
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                username,
-                password
-            })
+    try {
+
+        const response = await fetch(
+            "https://scv-hot-beverages-production.up.railway.app/api/auth/login",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username,
+                    password
+                })
+            }
+        );
+
+        const result = await response.text();
+
+        if (result === "LOGIN_SUCCESS") {
+
+            localStorage.setItem("loggedIn", "true");
+            localStorage.setItem("username", username);
+
+            window.location.href = "admin.html";
+
+        } else {
+
+            alert("Invalid Username or Password");
+
         }
-    );
 
-    const result = await response.text();
+    } catch (error) {
 
-    if(result === "LOGIN_SUCCESS") {
-
-        localStorage.setItem("loggedIn", "true");
-localStorage.setItem("username", username);
-
-        window.location.href = "admin.html";
-
-    } else {
-
-        alert("Invalid Username or Password");
+        console.error(error);
+        alert("Unable to connect to server.");
 
     }
 }
