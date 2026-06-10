@@ -2,8 +2,7 @@
    SCV ADMIN DASHBOARD SCRIPT
    ========================================================================== */
 
-const API_BASE_URL = "http://localhost:8080/api/inquiries";
-
+const API_BASE_URL = "https://scv-hot-beverages-production.up.railway.app/api/inquiries";
 // Dashboard State
 let currentPage = 0;
 let pageSize = 10;
